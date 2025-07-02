@@ -1,2 +1,17 @@
-hello
-india..
+import hashlib
+import os
+
+def get_file_hash(file_path):
+    sha256 = hashlib.sha256()
+    with open(file_path, 'rb') as f:
+        while chunk := f.read(4096):
+            sha256.update(chunk)
+    return sha256.hexdigest()
+
+# Example usage
+file_path = 'example.txt'  # Replace with your file path
+if os.path.exists(file_path):
+    hash_value = get_file_hash(file_path)
+    print(f"SHA-256 Hash of {file_path}: {hash_value}")
+else:
+    print("File not found!")
